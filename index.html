@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -20,10 +19,8 @@
   <title>자연 속 오감테라피 BOOK</title>
   <meta property="og:title" content="자연 속 오감테라피 BOOK" />
   <meta property="og:description" content="나에게 맞는 자연의 향기와 차를 찾아보세요." />
-  
-  <!-- 이미지 경로 문제 방지 (og:image는 절대경로 권장하지만, 일단 둠) -->
   <meta property="og:image" content="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1200&auto=format&fit=crop" />
-
+  
   <!-- 폰트: 둥근 'Binggrae'체와 손글씨 'Nanum Pen Script' -->
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
 
@@ -67,7 +64,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:10px; 
+      padding:16px; 
       overflow-x:hidden;
       -webkit-tap-highlight-color: transparent;
       letter-spacing: -0.02em;
@@ -75,7 +72,7 @@
 
     .wrap{width:min(720px, 100%)}
 
-    /* 카드 스타일 */
+    /* 카드 스타일 (수정됨) */
     .card{
       --text: #4e342e;       
       --muted: #8d6e63;      
@@ -83,11 +80,17 @@
       
       background: rgba(255, 255, 255, 0.96); 
       border:1px solid rgba(255,255,255,0.6);
-      border-radius:20px;
-      padding: 16px; 
+      border-radius:24px;
+      padding: 24px; /* PC에서는 여백 넉넉하게 */
+      
       box-shadow: 0 10px 40px rgba(0,0,0,.25);
       backdrop-filter: blur(12px);
-      min-height: 95svh; 
+      
+      /* ▼▼▼ [핵심 수정] PC에서는 내용에 맞게 늘어나도록 변경 (너무 길어지는 것 방지) ▼▼▼ */
+      min-height: 600px; 
+      height: auto; 
+      /* ▲▲▲ ----------------------------------------------------------- ▲▲▲ */
+
       display: flex; flex-direction: column;
       color: var(--text);
       position: relative;
@@ -102,7 +105,7 @@
 
     h1 { 
       font-family: var(--font-title);
-      font-size: 24px; 
+      font-size: 26px; 
       margin: 0; 
       letter-spacing: -0.5px; 
       line-height: 1.3; 
@@ -110,7 +113,7 @@
       word-break: keep-all; 
     }
     
-    .sub { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.4; word-break: keep-all; }
+    .sub { color: var(--muted); font-size: 15px; margin-top: 6px; line-height: 1.4; word-break: keep-all; }
 
     .pill{
       display:inline-flex; align-items:center; gap:8px;
@@ -152,7 +155,7 @@
     .btn.capture { border-color: #4e342e; color: #fff; background: #4e342e; }
     .btn.danger{ border-color: #ffccbc; color: #d84315; background: #fbe9e7; }
 
-    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
     @media(max-width: 500px) { .menu-grid { grid-template-columns: 1fr; } }
 
     .hero-btn {
@@ -244,7 +247,7 @@
 
     .result .box{
       border:1px solid #d7ccc8; border-radius:20px;
-      padding: 20px 16px; 
+      padding: 24px; /* PC는 넉넉하게 */
       background: #fffaf0; 
       margin-bottom: 14px;
       box-shadow: 0 4px 12px rgba(62, 39, 35, 0.05); word-break: keep-all;
@@ -316,8 +319,23 @@
     .qr-img { width: 160px; height: 160px; margin: 0 auto 16px; display: block; }
     .url-input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #d7ccc8; border-radius: 12px; background: #f5f5f5; font-family: var(--font-body); }
     
-    @media(max-width: 420px) {
-        .card { padding: 12px; }
+    /* [수정됨] 모바일 최적화 미디어 쿼리 (가장 중요!) */
+    @media(max-width: 480px) {
+        body { padding: 12px; } /* 모바일에서 전체 여백 줄임 */
+        
+        .card { 
+          padding: 16px; /* 카드 안쪽 여백 줄임 */
+          min-height: 90svh; /* 모바일에서는 다시 길게 (앱처럼) */
+          border-radius: 20px;
+        }
+        
+        .result .box {
+          padding: 20px 16px; /* 결과 박스 좌우 여백 축소 */
+        }
+
+        h1 { font-size: 22px; } /* 모바일 타이틀 크기 조정 */
+        
+        /* 글자 크기 보정 */
         .analysis-text { font-size: 16px !important; }
         .persona-desc { font-size: 16px !important; }
         .oil-card .scent-desc { font-size: 14px !important; }
@@ -367,7 +385,6 @@
   <div id="shareModal" class="modal-overlay hidden" onclick="closeShareModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <h3>QR코드 공유</h3>
-      <!-- 이미지와 Input 값은 JS에서 동적으로 채워집니다 -->
       <img id="qrImage" src="" alt="QR Code" class="qr-img">
       <input type="text" id="shareUrlInput" class="url-input" readonly>
       <div style="display:flex; gap:8px;">
@@ -379,7 +396,6 @@
 
 <script>
 (() => {
-  // [수정됨] 현재 접속한 주소를 자동으로 가져옴 (GitHub Pages, Localhost 모두 대응)
   let CURRENT_URL = window.location.href;
 
   const ICONS = {
@@ -497,6 +513,30 @@
           { text: "나를 지키는 단단한 보호막", tag: "방어" },
           { text: "영혼을 울리는 깊은 깨달음", tag: "영혼" }
       ]}
+  ];
+
+  const OIL_INVENTORY = OIL_DATA.map(o => ({...o, note: "M"})); 
+
+  const TEA_TYPES = {
+    warm:   { name: "따뜻순환차", example: "생강차(또는 생강+대추)", pitch: "포근하게 감싸주는 한 잔이 필요해요.", tags:["따뜻함","손발차가움","포근"], },
+    cool:   { name: "맑은쿨링차", example: "국화차(또는 박하)", pitch: "머리까지 맑아지는 상쾌함이 필요해요.", tags:["상쾌","두통","리셋"], },
+    digest: { name: "소화편안차", example: "보리차(또는 진피)", pitch: "속을 편안하게 비우고 싶어요.", tags:["구수함","더부룩","소화"], },
+    calm:   { name: "긴장완화차", example: "대추차", pitch: "마음을 차분하게 낮춰보세요.", tags:["안정","불면","휴식"], },
+    energy: { name: "기력충전차", example: "인삼차(또는 쌍화)", pitch: "방전된 에너지, 충전이 필요해요.", tags:["에너지","지침","활력"], },
+    water:  { name: "수분정리차", example: "옥수수수염차", pitch: "가볍게 몸을 정돈하고 싶어요.", tags:["붓기","가벼움","배출"], },
+    five:   { name: "오미자차", example: "오미자차", pitch: "다섯가지 맛으로 리듬을 되찾으세요.", tags:["새콤달콤","갈증","균형"], }
+  };
+
+  const TEA_QUESTIONS = [
+    { q: "Q1. 지금 내 몸의 “온도 감각”은?", a: [{t:"손발이 차고 따뜻한 게 좋다",s:{warm:2,energy:1}}, {t:"더위를 타고 시원한 게 좋다",s:{cool:2}}, {t:"그때그때 다르다",s:{digest:1,calm:1}}, {t:"잘 모르겠다",s:{}}] },
+    { q: "Q2. 요즘 가장 불편한 점은?", a: [{t:"속이 더부룩/가스",s:{digest:2}}, {t:"목마름/건조함",s:{five:2}}, {t:"몸이 붓고 무거움",s:{water:2}}, {t:"딱히 없음/기분전환",s:{cool:1,calm:1}}] },
+    { q: "Q3. 스트레스 정도는?", a: [{t:"예민하고 머리가 복잡",s:{calm:2}}, {t:"축 처지고 기운 없음",s:{energy:2}}, {t:"스트레스 적음",s:{digest:1}}, {t:"감정 기복이 심함",s:{five:1,calm:1}}] },
+    { q: "Q4. 잠은 잘 주무시나요?", a: [{t:"잠들기 힘듦",s:{calm:2}}, {t:"자주 깨거나 개운치 않음",s:{energy:1,calm:1}}, {t:"잘 자는 편",s:{cool:1}}, {t:"수면시간 불규칙",s:{five:1}}] },
+    { q: "Q5. 음식 먹은 후 반응은?", a: [{t:"기름진 것 먹으면 부담",s:{digest:2}}, {t:"매운/뜨거운 것 먹으면 확 달아오름",s:{cool:2}}, {t:"찬 것 먹으면 배 아픔",s:{warm:2}}, {t:"상관 없음",s:{}}] },
+    { q: "Q6. 오늘 바라는 차의 역할은?", a: [{t:"따뜻하게 위로받기",s:{warm:2}}, {t:"상쾌하게 리셋",s:{cool:2}}, {t:"속 편하게",s:{digest:2}}, {t:"마음의 안정",s:{calm:2}}] },
+    { q: "Q7. 선호하는 향/맛은?", a: [{t:"알싸한 향(생강/계피)",s:{warm:2}}, {t:"향긋한 꽃/허브향",s:{cool:2}}, {t:"구수한 곡물맛",s:{digest:2}}, {t:"새콤달콤한 맛",s:{five:2}}] },
+    { q: "Q8. 평소 물 섭취량은?", a: [{t:"잘 안 마심",s:{five:1,water:1}}, {t:"많이 마셔도 갈증 남",s:{five:2}}, {t:"보통",s:{}}, {t:"짠 음식 먹으면 잘 부음",s:{water:2}}] },
+    { q: "Q9. 현재 에너지 상태는?", a: [{t:"배터리 10% (지침)",s:{energy:2,calm:1}}, {t:"평범함",s:{digest:1}}, {t:"과열/흥분 상태",s:{cool:2}}, {t:"들쭉날쭉함",s:{five:1}}] },
   ];
 
   const mainContent = document.getElementById("mainContent");
