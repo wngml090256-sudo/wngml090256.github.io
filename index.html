@@ -20,10 +20,11 @@
   <title>자연 속 오감테라피 BOOK</title>
   <meta property="og:title" content="자연 속 오감테라피 BOOK" />
   <meta property="og:description" content="나에게 맞는 자연의 향기와 차를 찾아보세요." />
+  
+  <!-- 이미지 경로 문제 방지 (og:image는 절대경로 권장하지만, 일단 둠) -->
   <meta property="og:image" content="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1200&auto=format&fit=crop" />
-  <meta property="og:url" content="https://palgonghealing.netlify.app/" />
 
-  <!-- 폰트 로드: Pretendard (본문용), Nanum Pen Script (손글씨) -->
+  <!-- 폰트: 둥근 'Binggrae'체와 손글씨 'Nanum Pen Script' -->
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -34,7 +35,6 @@
         font-weight: normal;
         font-style: normal;
     }
-    /* 빙그레체 볼드 (강조용) */
     @font-face {
         font-family: 'Binggrae-Bold';
         src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae-Bold.woff') format('woff');
@@ -45,9 +45,9 @@
     :root{
       --accent:#2f8a58; 
       --accent2:#d4a024; 
-      --font-title: 'Binggrae-Bold', 'Binggrae', sans-serif; /* 제목용: 빙그레체 */
-      --font-body: 'Binggrae', "Pretendard", sans-serif;     /* 본문용: 빙그레체 (기본) */
-      --font-hand: "Nanum Pen Script", cursive; /* 서명/질문용: 손글씨 */
+      --font-title: 'Binggrae-Bold', 'Binggrae', sans-serif;
+      --font-body: 'Binggrae', "Pretendard", sans-serif;
+      --font-hand: "Nanum Pen Script", cursive;
     }
 
     *{box-sizing:border-box}
@@ -67,30 +67,27 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:16px; 
+      padding:10px; 
       overflow-x:hidden;
       -webkit-tap-highlight-color: transparent;
-      letter-spacing: -0.02em; /* 빙그레체 자간 살짝 좁힘 (더 깔끔해 보임) */
+      letter-spacing: -0.02em;
     }
 
     .wrap{width:min(720px, 100%)}
 
     /* 카드 스타일 */
-       .card {
+    .card{
       --text: #4e342e;       
       --muted: #8d6e63;      
       --border: rgba(0,0,0,0.1);
       
       background: rgba(255, 255, 255, 0.96); 
-      border: 1px solid rgba(255,255,255,0.6);
-      border-radius: 20px; /* 모서리 둥글기 살짝 줄임 */
-      
-      /* ▼▼▼ [핵심] 모바일에서는 여백을 최소화 (기존 24px -> 16px) ▼▼▼ */
+      border:1px solid rgba(255,255,255,0.6);
+      border-radius:20px;
       padding: 16px; 
-      
-      box-shadow: 0 10px 40px rgba(0,0,0,.2);
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
       backdrop-filter: blur(12px);
-      min-height: 100svh; /* 모바일 전체 화면 높이 사용 */
+      min-height: 95svh; 
       display: flex; flex-direction: column;
       color: var(--text);
       position: relative;
@@ -98,14 +95,14 @@
 
     header {
       display: flex; align-items: flex-start; justify-content: space-between; 
-      margin-bottom: 16px; gap: 10px;
+      margin-bottom: 16px; gap: 8px;
     }
     .header-left { flex: 1; min-width: 0; } 
     .header-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
     h1 { 
-      font-family: var(--font-title); /* 빙그레체 적용 */
-      font-size: 25px; 
+      font-family: var(--font-title);
+      font-size: 24px; 
       margin: 0; 
       letter-spacing: -0.5px; 
       line-height: 1.3; 
@@ -113,19 +110,7 @@
       word-break: keep-all; 
     }
     
-    .sub {
-      color: var(--muted); 
-      font-size: 15px; 
-      margin-top: 6px; 
-      line-height: 1.4;
-      word-break: keep-all;
-    }
-
-    @media(max-width: 400px) {
-      h1 { font-size: 22px; }
-      .sub { font-size: 14px; }
-      .card { padding: 20px; }
-    }
+    .sub { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.4; word-break: keep-all; }
 
     .pill{
       display:inline-flex; align-items:center; gap:8px;
@@ -158,7 +143,6 @@
       border:1px solid var(--border); background: #fff;
       color: var(--text); padding:14px 16px; border-radius:16px;
       cursor:pointer; font-size:16px; transition: all .2s;
-      /* 빙그레체는 Bold가 뭉개지지 않으므로 강조 */
       font-family: var(--font-title); 
       word-break: keep-all;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -168,44 +152,39 @@
     .btn.capture { border-color: #4e342e; color: #fff; background: #4e342e; }
     .btn.danger{ border-color: #ffccbc; color: #d84315; background: #fbe9e7; }
 
-    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
     @media(max-width: 500px) { .menu-grid { grid-template-columns: 1fr; } }
 
-     .hero-btn {
+    .hero-btn {
       position: relative;
       display: flex; 
       flex-direction: column; 
-      justify-content: center; /* 세로 중앙 정렬 (위아래 벌어짐 방지) */
-      align-items: center;     /* 가로 중앙 정렬 */
-      height: 240px;           /* 높이를 조금 더 시원하게 키움 */
-      padding: 20px;
+      justify-content: center; 
+      align-items: center; 
+      height: 220px; 
+      padding: 16px;
       border: 1px solid var(--border); 
       border-radius: 24px;
-      background: rgba(255,255,255,0.8); 
+      background: rgba(255,255,255,0.7); 
       color: var(--text);
       cursor: pointer; 
-      text-align: center;      /* 텍스트도 가운데 정렬 */
+      text-align: center; 
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
-    }
-    .hero-btn .icon-area {
-      flex: 0 0 auto;          /* 높이 강제 차지 해제 (중요!) */
-      margin-bottom: 15px;     /* 이미지와 글자 사이 간격 */
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
     .hero-btn:active { transform: scale(0.98); background: #fff; }
-    .hero-btn svg { width: 64px; height: 64px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
-    .hero-btn .label {
-      font-size: 20px;         /* 제목 글씨 조금 더 크게 */
-      margin-bottom: 6px; 
-      color: #2e7d32; 
-      font-family: var(--font-title);
+
+    .hero-btn .icon-area { 
+      flex: 0 0 auto;
+      margin-bottom: 15px; 
+      display: flex; align-items: center; justify-content: center; 
     }
-    .hero-btn .desc { font-size: 14px; color: var(--muted); line-height: 1.4; }
+    .hero-btn svg { width: 64px; height: 64px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+    .hero-btn .label { 
+      font-size: 19px; margin-bottom: 4px; color: #2e7d32; 
+      font-family: var(--font-title); 
+    }
+    .hero-btn .desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
 
     .tea-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .tea-btn {
@@ -215,40 +194,31 @@
       background: rgba(255,255,255,0.6); color: var(--text); cursor: pointer;
     }
     .tea-btn svg { width: 36px; height: 36px; }
-    .tea-btn span { 
-      font-size: 14px; 
-      font-family: var(--font-title); 
-      text-align: center; 
-    }
+    .tea-btn span { font-size: 14px; font-family: var(--font-title); text-align: center; }
 
     .q-title{
-      font-size:20px; margin:0 0 24px; line-height:1.45; 
-      font-family: var(--font-title); /* 제목용 빙그레체 */
-      color: #2e7d32; word-break: keep-all; 
+      font-size:20px; margin:0 0 20px; line-height:1.45; 
+      font-family: var(--font-title); color: #2e7d32; word-break: keep-all; 
     }
-    .choices{display:grid; gap:12px;}
+    .choices{display:grid; gap:10px;}
     button.choice{
       text-align:left; width:100%; border-radius:18px;
       border:1px solid var(--border); background: #fff;
       color: var(--text); padding:18px; font-size:16px; cursor:pointer;
-      font-family: var(--font-body); /* 본문용 빙그레체 */
-      line-height: 1.4; word-break: keep-all;
+      font-family: var(--font-body); line-height: 1.4; word-break: keep-all;
     }
-    @media (hover: hover) {
-      button.choice:hover { background: #f1f8e9; border-color: var(--accent); }
-    }
+    @media (hover: hover) { button.choice:hover { background: #f1f8e9; border-color: var(--accent); } }
     button.choice.clicked { background: #e8f5e9; border-color: var(--accent); color: #1b5e20; font-family: var(--font-title); }
 
-    /* 선호 향기 카드 */
     .pref-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-      width: 100%; max-width: 340px; margin: 0 auto 24px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+      width: 100%; max-width: 340px; margin: 0 auto 20px;
     }
     .pref-card {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 16px; background: #fff; border: 1px solid #eee; border-radius: 20px;
+      padding: 12px; background: #fff; border: 1px solid #eee; border-radius: 20px;
       cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.03); transition: all 0.15s ease-out;
-      -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; outline: none;
+      -webkit-user-select: none; user-select: none; outline: none;
     }
     .pref-card.clicked {
       background-color: #e8f5e9 !important; border-color: var(--accent) !important;
@@ -257,13 +227,12 @@
     @media (hover: hover) and (pointer: fine) {
       .pref-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(47, 138, 88, 0.1); }
     }
-    .pref-img { width: 110px; height: 110px; object-fit: contain; margin-bottom: 8px; pointer-events: none; }
+    .pref-img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 8px; pointer-events: none; }
     .pref-name { 
-      font-size: 16px; 
-      font-family: var(--font-title); /* 제목용이라 Bold */
+      font-size: 16px; font-family: var(--font-title);
       color: #3e2723; margin-bottom: 2px; pointer-events: none; 
     }
-    .pref-desc { font-size: 12px; color: #8d6e63; text-align: center; word-break: keep-all; line-height: 1.2; pointer-events: none; }
+    .pref-desc { font-size: 11px; color: #8d6e63; text-align: center; word-break: keep-all; line-height: 1.2; pointer-events: none; }
 
     .wide-btn {
       width: 100%; margin-top: 12px; padding: 16px;
@@ -273,59 +242,51 @@
       font-family: var(--font-title);
     }
 
-     .result .box {
-      border: 1px solid #d7ccc8; 
-      border-radius: 16px;
-      
-      /* ▼▼▼ [핵심] 내부 여백 줄임 (기존 24px -> 15px) ▼▼▼ */
-      padding: 20px 15px; 
-      
+    .result .box{
+      border:1px solid #d7ccc8; border-radius:20px;
+      padding: 20px 16px; 
       background: #fffaf0; 
-      margin-bottom: 12px;
-      box-shadow: 0 2px 8px rgba(62, 39, 35, 0.05); 
-      word-break: keep-all;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(62, 39, 35, 0.05); word-break: keep-all;
     }
-
     .tag{
       display:inline-flex; padding:4px 10px; border-radius:999px;
       border:1px solid #a1887f; font-size:13px; color: #5d4037;
       margin-right:6px; margin-bottom: 6px; background: #fff;
     }
 
-    /* 오일 결과 카드 */
     .oil-card {
-      background: #fff; border-left: 5px solid var(--accent2); padding: 18px; 
+      background: #fff; border-left: 5px solid var(--accent2); padding: 16px; 
       margin-bottom: 12px; border-radius: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       color: #3e2723; display: flex; align-items: center;
     }
     .oil-card.best {
       background: linear-gradient(135deg, #fff8e1 0%, #fff 100%);
       border: 2px solid var(--accent2); transform: scale(1.02);
-      margin-bottom: 24px; box-shadow: 0 8px 24px rgba(212, 160, 36, 0.15);
+      margin-bottom: 20px; box-shadow: 0 8px 24px rgba(212, 160, 36, 0.15);
       position: relative;
     }
     .oil-card.best::after { content: '👑 Best Pick'; position: absolute; top: -12px; right: 12px; background: #d4a024; color: #fff; font-size: 12px; padding: 4px 10px; border-radius: 12px; font-family: var(--font-title); }
     
-    .persona-card { background: #efebe9; border: 1px dashed #a1887f; padding: 20px; border-radius: 16px; margin-bottom: 24px; text-align: center; }
-    .persona-title { 
-      color: #5d4037; 
-      font-size: 17px; margin-bottom: 8px; font-family: var(--font-title); 
-    }
+    .persona-card { background: #efebe9; border: 1px dashed #a1887f; padding: 18px; border-radius: 16px; margin-bottom: 20px; text-align: center; }
+    .persona-title { color: #5d4037; font-size: 17px; margin-bottom: 8px; font-family: var(--font-title); }
     .persona-desc { font-size: 15px; color: #4e342e; line-height: 1.6; word-break: keep-all; }
     
-    .empathy-msg { background: #e8f5e9; padding: 20px; border-radius: 16px; margin-bottom: 28px; text-align: center; font-size: 16px; font-weight: 600; line-height: 1.6; color: #1b5e20; word-break: keep-all; box-shadow: 0 2px 8px rgba(47, 138, 88, 0.1); }
+    .empathy-msg { background: #e8f5e9; padding: 18px; border-radius: 16px; margin-bottom: 24px; text-align: center; font-size: 16px; font-weight: 600; line-height: 1.6; color: #1b5e20; word-break: keep-all; box-shadow: 0 2px 8px rgba(47, 138, 88, 0.1); }
 
-    /* 상담 분석 박스 */
     .analysis-box { 
         background:#fff; border:1px solid #d7ccc8; border-left:5px solid #2f8a58; 
-        border-radius:12px; padding:20px; margin-bottom:28px; text-align:left; 
+        border-radius:12px; padding:18px; margin-bottom:24px; text-align:left; 
     }
     .analysis-title { 
       font-size: 18px; 
       font-family: var(--font-title); 
-      color: #2f8a58; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+      color: #2f8a58; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
     }
-    .analysis-text { font-size: 15px; color: #4e342e; line-height: 1.65; word-break: keep-all; }
+    .analysis-text { 
+      font-size: 16px; 
+      color: #4e342e; line-height: 1.65; word-break: keep-all; 
+    }
 
     .selection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
     .oil-select-item { 
@@ -334,7 +295,7 @@
         transition: 0.2s; word-break: keep-all; font-family: var(--font-title);
     }
     .oil-select-item.selected { background-color: var(--accent); color: white; border-color: var(--accent); }
-    .recipe-box { background: #e8f5e9; padding: 24px; border-radius: 20px; margin-bottom: 16px; border: 1px dashed var(--accent); }
+    .recipe-box { background: #e8f5e9; padding: 20px; border-radius: 20px; margin-bottom: 16px; border: 1px dashed var(--accent); }
     .drop-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 16px;}
     
     .footer{ margin-top:auto; padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color: #8d6e63; font-size:12px; word-break: keep-all; line-height: 1.4; }
@@ -342,7 +303,6 @@
     .hidden { display: none !important; }
     .tiny { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
 
-    /* 서명 및 여운 질문 */
     .closing-q { text-align: center; margin-top: 24px; font-size: 19px; color: #5d4037; font-family: var(--font-hand); line-height: 1.4; }
     .signature { text-align: right; margin-top: 12px; font-size: 22px; color: #8d6e63; font-family: var(--font-hand); }
 
@@ -355,6 +315,13 @@
     .modal-box { background: white; width: 300px; padding: 24px; border-radius: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
     .qr-img { width: 160px; height: 160px; margin: 0 auto 16px; display: block; }
     .url-input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #d7ccc8; border-radius: 12px; background: #f5f5f5; font-family: var(--font-body); }
+    
+    @media(max-width: 420px) {
+        .card { padding: 12px; }
+        .analysis-text { font-size: 16px !important; }
+        .persona-desc { font-size: 16px !important; }
+        .oil-card .scent-desc { font-size: 14px !important; }
+    }
   </style>
 </head>
 <body>
@@ -400,8 +367,9 @@
   <div id="shareModal" class="modal-overlay hidden" onclick="closeShareModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <h3>QR코드 공유</h3>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://palgonghealing.netlify.app/" alt="QR Code" class="qr-img">
-      <input type="text" value="https://palgonghealing.netlify.app/" class="url-input" readonly id="shareUrlInput">
+      <!-- 이미지와 Input 값은 JS에서 동적으로 채워집니다 -->
+      <img id="qrImage" src="" alt="QR Code" class="qr-img">
+      <input type="text" id="shareUrlInput" class="url-input" readonly>
       <div style="display:flex; gap:8px;">
         <button class="btn primary" style="flex:1" onclick="copyShareUrl()">주소 복사</button>
         <button class="btn" style="flex:1" onclick="closeShareModal()">닫기</button>
@@ -411,11 +379,12 @@
 
 <script>
 (() => {
-  const SHARE_URL = "https://palgonghealing.netlify.app/";
+  // [수정됨] 현재 접속한 주소를 자동으로 가져옴 (GitHub Pages, Localhost 모두 대응)
+  let CURRENT_URL = window.location.href;
 
   const ICONS = {
-    oil: `<img src="titleoil.png" alt="에센셜오일" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;">`,
-    tea: `<img src="teaset.png" alt="다도세트" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;">`, 
+    oil: `<img src="titleoil.png" alt="에센셜오일" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 12px;">`,
+    tea: `<img src="teaset.png" alt="다도세트" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 12px;">`,
     yakseon: `<svg viewBox="0 0 24 24" fill="none" stroke="#d68c00" stroke-width="1.5"><path d="M12 3v18m-9-9h18" stroke="currentColor"/><circle cx="12" cy="12" r="5" fill="rgba(214,140,0,0.1)"/></svg>`, 
     herb: `<svg viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="1.5"><path d="M12 22s8-10 8-16a8 8 0 0 0-16 0c0 6 8 16 8 16z"/><path d="M12 6v8"/></svg>`, 
     green: `<svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.5"><path d="M2 22h20M12 2v20M5 10c0-4 3-8 7-8s7 4 7 8v12H5V10z"/></svg>`,
@@ -432,7 +401,6 @@
     isProcessing: false 
   };
 
-  // 말투를 "~요"로 모두 수정
   const OIL_DATA = [
       { name: "라벤더", category: "Floral", note: "M", tags: ["휴식", "수면"], desc: "많은 배려로 지치셨군요. 지금은 엄마 품 같은 온전한 쉼이 필요해요.", scentDesc: "보랏빛 꽃밭이 바람에 흩날리는 듯한 편안한 향" },
       { name: "일랑일랑", category: "Floral", note: "B", tags: ["매혹", "감각"], desc: "감성이 풍부한 당신, 억눌린 감정을 로맨틱하게 표현해보세요.", scentDesc: "달콤하고 묵직하게 피어오르는 관능적인 꽃향기" },
@@ -531,30 +499,6 @@
       ]}
   ];
 
-  const OIL_INVENTORY = OIL_DATA.map(o => ({...o, note: "M"})); 
-
-  const TEA_TYPES = {
-    warm:   { name: "따뜻순환차", example: "생강차(또는 생강+대추)", pitch: "포근하게 감싸주는 한 잔이 필요해요.", tags:["따뜻함","손발차가움","포근"], },
-    cool:   { name: "맑은쿨링차", example: "국화차(또는 박하)", pitch: "머리까지 맑아지는 상쾌함이 필요해요.", tags:["상쾌","두통","리셋"], },
-    digest: { name: "소화편안차", example: "보리차(또는 진피)", pitch: "속을 편안하게 비우고 싶어요.", tags:["구수함","더부룩","소화"], },
-    calm:   { name: "긴장완화차", example: "대추차", pitch: "마음을 차분하게 낮춰보세요.", tags:["안정","불면","휴식"], },
-    energy: { name: "기력충전차", example: "인삼차(또는 쌍화)", pitch: "방전된 에너지, 충전이 필요해요.", tags:["에너지","지침","활력"], },
-    water:  { name: "수분정리차", example: "옥수수수염차", pitch: "가볍게 몸을 정돈하고 싶어요.", tags:["붓기","가벼움","배출"], },
-    five:   { name: "오미자차", example: "오미자차", pitch: "다섯가지 맛으로 리듬을 되찾으세요.", tags:["새콤달콤","갈증","균형"], }
-  };
-
-  const TEA_QUESTIONS = [
-    { q: "Q1. 지금 내 몸의 “온도 감각”은?", a: [{t:"손발이 차고 따뜻한 게 좋다",s:{warm:2,energy:1}}, {t:"더위를 타고 시원한 게 좋다",s:{cool:2}}, {t:"그때그때 다르다",s:{digest:1,calm:1}}, {t:"잘 모르겠다",s:{}}] },
-    { q: "Q2. 요즘 가장 불편한 점은?", a: [{t:"속이 더부룩/가스",s:{digest:2}}, {t:"목마름/건조함",s:{five:2}}, {t:"몸이 붓고 무거움",s:{water:2}}, {t:"딱히 없음/기분전환",s:{cool:1,calm:1}}] },
-    { q: "Q3. 스트레스 정도는?", a: [{t:"예민하고 머리가 복잡",s:{calm:2}}, {t:"축 처지고 기운 없음",s:{energy:2}}, {t:"스트레스 적음",s:{digest:1}}, {t:"감정 기복이 심함",s:{five:1,calm:1}}] },
-    { q: "Q4. 잠은 잘 주무시나요?", a: [{t:"잠들기 힘듦",s:{calm:2}}, {t:"자주 깨거나 개운치 않음",s:{energy:1,calm:1}}, {t:"잘 자는 편",s:{cool:1}}, {t:"수면시간 불규칙",s:{five:1}}] },
-    { q: "Q5. 음식 먹은 후 반응은?", a: [{t:"기름진 것 먹으면 부담",s:{digest:2}}, {t:"매운/뜨거운 것 먹으면 확 달아오름",s:{cool:2}}, {t:"찬 것 먹으면 배 아픔",s:{warm:2}}, {t:"상관 없음",s:{}}] },
-    { q: "Q6. 오늘 바라는 차의 역할은?", a: [{t:"따뜻하게 위로받기",s:{warm:2}}, {t:"상쾌하게 리셋",s:{cool:2}}, {t:"속 편하게",s:{digest:2}}, {t:"마음의 안정",s:{calm:2}}] },
-    { q: "Q7. 선호하는 향/맛은?", a: [{t:"알싸한 향(생강/계피)",s:{warm:2}}, {t:"향긋한 꽃/허브향",s:{cool:2}}, {t:"구수한 곡물맛",s:{digest:2}}, {t:"새콤달콤한 맛",s:{five:2}}] },
-    { q: "Q8. 평소 물 섭취량은?", a: [{t:"잘 안 마심",s:{five:1,water:1}}, {t:"많이 마셔도 갈증 남",s:{five:2}}, {t:"보통",s:{}}, {t:"짠 음식 먹으면 잘 부음",s:{water:2}}] },
-    { q: "Q9. 현재 에너지 상태는?", a: [{t:"배터리 10% (지침)",s:{energy:2,calm:1}}, {t:"평범함",s:{digest:1}}, {t:"과열/흥분 상태",s:{cool:2}}, {t:"들쭉날쭉함",s:{five:1}}] },
-  ];
-
   const mainContent = document.getElementById("mainContent");
   const pageTitle = document.getElementById("pageTitle");
   const pageSub = document.getElementById("pageSub");
@@ -565,6 +509,9 @@
     barFill.style.width = '0%';
     state.isProcessing = false; 
     
+    // 화면 바뀔 때마다 현재 URL 갱신
+    CURRENT_URL = window.location.href;
+
     if (state.view === 'home') {
       setTitle("자연 속 오감테라피 BOOK", "그림 버튼을 눌러 에센셜오일/티테라피를 선택하세요.", "HOME");
       mainContent.innerHTML = `
@@ -756,7 +703,6 @@
   
   window.prevOilStep = () => { if (state.oilStep > 0) { state.oilStep--; render(); } };
 
-  // ▼▼▼ [결과 화면 로직 전면 수정: 상담사 톤 적용] ▼▼▼
   function renderOilResult() {
     let scoredOils = OIL_DATA.map(oil => {
         let score = oil.tags.filter(t => state.oilTags.includes(t)).length;
@@ -774,30 +720,26 @@
     
     const userPref = state.userPreference || "Floral";
 
-    // ▼ 상담 멘트 생성 로직 ▼
     let analysisTitle = "";
     let analysisDesc = "";
     
     const isMatch = userPref === topCat || (userPref === "Woody" && topCat === "Earthy") || (userPref === "Earthy" && topCat === "Woody");
 
     if (isMatch) {
-        // [유형 A. 일치]
         analysisTitle = "🌿 나를 사랑하는 마음, 그 평온한 일치";
         analysisDesc = `오늘 당신의 마음을 가만히 들여다보니, 참 평온하고 단단한 상태이시군요.<br><br>평소 좋아하시던 <strong>[${userPref}]</strong> 향기가 오늘 당신의 몸과 마음이 원하는 에너지와 정확히 맞닿아 있어요. 이는 당신이 평소에도 스스로를 세심하게 관찰하고, 무엇이 나를 행복하게 하는지 잘 알고 있다는 아주 기분 좋은 신호예요. <br><br>아로마 테라피에서는 이를 <strong>'심신의 조화(Harmony)'</strong>라고 부르지요. 오늘의 이 향기는 당신의 긍정적인 에너지를 더욱 짙게 물들여줄 따뜻한 응원이 될 거예요.`;
     } else {
-        // [유형 B. 불일치]
         analysisTitle = "💌 미처 몰랐던 내 마음의 작은 목소리";
         analysisDesc = `조금은 낯선 결과에 고개를 갸우뚱하셨나요? 평소 좋아하던 향기가 당신의 '멋진 모습'을 대변했다면, 오늘 발견된 이 향기는 당신의 무의식이 조심스레 보내온 <strong>'진짜 위로'</strong>의 편지예요.<br><br>우리는 때로 익숙함에 가려져 지금 당장 내 몸이 간절히 원하는 에너지를 놓치기도 해요. 아로마 테라피의 진정한 매력은 머리가 아닌, <strong>[감각이 선택한 결핍]</strong>을 채워주는 데 있지요. <br><br>오늘만큼은 익숙한 취향을 잠시 내려놓고, 당신의 무의식이 선택한 이 향기에 온전히 몸을 맡겨보는 건 어떨까요? 분명 당신의 지친 일상에 예상치 못한 생동감을 불어넣어 줄 거예요.`;
     }
 
-    // 노트별 조언 추가
     let noteAdvice = "";
     if (bestOil.note === 'T') {
-        noteAdvice = `<br><br><strong>💡 Top Note 처방: "새로운 시작을 위한 마음의 환기"</strong><br> 오늘 당신의 선택은 대부분 가볍고 상쾌하게 피어오르는 '탑 노트' 계열에 집중되어 있습니다. 이는 지금 당신의 감각이 복잡하게 얽힌 생각들을 잠시 내려놓고, 즉각적이고 맑은 에너지를 간절히 찾고 있다는 명확한 신호입니다.`;
+        noteAdvice = `<br><br><strong>💡 Top Note 처방:</strong><br>"지금 당신의 어깨가 조금 무거운 건 아닌가요? 복잡한 생각의 타래를 잠시 끊어내고, 맑은 공기 한 점을 들이마시듯 가벼운 전환이 필요한 시기예요."`;
     } else if (bestOil.note === 'M') {
-        noteAdvice = `<br><br><strong>💡 Middle Note 처방: "나를 지키는 다정한 중심"</strong><br>최종 분석 결과, 향기의 핵심을 담당하는 '미들 노트'가 많은 비중으로 나타났습니다. 아로마 테라피에서 미들 노트는 감정의 균형을 잡는 '허리' 역할을 합니다. 당신의 무의식이 이 향들을 선택했다는 것은, 현재 외부의 자극으로부터 나를 보호하고 흐트러진 마음의 중심을 다시 세우고 싶어 한다는 뜻입니다.`;
+        noteAdvice = `<br><br><strong>💡 Middle Note 처방:</strong><br>"누군가에게 내준 마음만큼, 정작 당신의 마음은 조금 허전했나 봐요. 요동치는 감정을 부드럽게 안아줄 따스한 위로가 당신의 곁에 머물러야 해요."`;
     } else if (bestOil.note === 'B') {
-        noteAdvice = `<br><br><strong>💡 Base Note 처방: "흔들리지 않는 단단한 뿌리"</strong><br>당신이 선택한 향기들의 데이터를 분석해 보면, 가장 묵직하고 깊은 울림을 주는 '베이스 노트' 위주의 향들이 최종적으로 선택되었습니다. 이는 단순히 기분을 바꾸는 것을 넘어, 내면의 바닥부터 단단하게 채워줄 깊은 안정감을 본능적으로 원하고 있음을 보여줍니다.`;
+        noteAdvice = `<br><br><strong>💡 Base Note 처방:</strong><br>"잠시 휘청여도 괜찮아요. 당신에겐 그 무엇에도 흔들리지 않고 중심을 잡아줄 깊고 단단한 대지의 에너지가 이미 내재되어 있으니까요."`;
     }
 
     state.lastResultOils = top5.slice(0, 3);
@@ -817,7 +759,6 @@
             </div>
           </div>
 
-          <!-- 상담 분석 박스 -->
           <div class="analysis-box">
              <div class="analysis-title">${analysisTitle}</div>
              <div class="analysis-text">${analysisDesc}${noteAdvice}</div>
@@ -839,7 +780,7 @@
                   <div style="font-size:${idx===0? '18px':'16px'}; margin-bottom:6px; ${idx===0?'color:#d4a024; font-weight:700;':''}">
                     ${idx+1}. ${oil.name}
                   </div>
-                  <div style="font-size:13px; color:#5d4037; line-height:1.4;">${oil.scentDesc}</div>
+                  <div class="scent-desc" style="font-size:13px; color:#5d4037; line-height:1.4;">${oil.scentDesc}</div>
                 </div>
               </div>
             `).join("")}
@@ -849,7 +790,6 @@
             🧪 이 처방대로 롤온 만들기
           </button>
 
-          <!-- 여운을 남기는 질문 & 서명 -->
           <div class="closing-q">"이 향기를 맡으며,<br>오늘 가장 하고 싶은 일은 무엇인가요?"</div>
           <div class="signature">자연환경해설사 정주희 드림 🌿</div>
 
@@ -923,10 +863,38 @@
         const link = document.createElement('a'); link.download = fileName + '.png'; link.href = canvas.toDataURL(); link.click();
     }).catch(err => { alert("이미지 저장 중 오류가 발생했습니다."); });
   };
-  window.openShareModal = async () => { if (navigator.share) { try { await navigator.share({ title: '자연 속 오감테라피', text: '나에게 맞는 자연의 향기와 차를 찾아보세요.', url: SHARE_URL }); return; } catch (e) {} } document.getElementById('shareModal').classList.remove('hidden'); };
+  
+  // [수정됨] 현재 URL 기반으로 QR코드 및 공유 링크 생성 (GitHub Pages 대응)
+  window.openShareModal = async () => {
+    const url = window.location.href; // 현재 주소 가져오기
+    
+    // 모달 내용 동적 업데이트
+    document.getElementById('shareUrlInput').value = url;
+    document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(url)}`;
+    
+    // 네이티브 공유 시도
+    if (navigator.share) { 
+        try { 
+            await navigator.share({ title: '자연 속 오감테라피', text: '나에게 맞는 자연의 향기와 차를 찾아보세요.', url: url }); 
+            return; 
+        } catch (e) {} 
+    } 
+    document.getElementById('shareModal').classList.remove('hidden'); 
+  };
+  
   window.closeShareModal = () => document.getElementById('shareModal').classList.add('hidden');
-  window.copyShareUrl = () => { const input = document.getElementById('shareUrlInput'); input.select(); try { navigator.clipboard.writeText(SHARE_URL).then(() => alert("주소가 복사되었습니다.")); } catch(err) { document.execCommand('copy'); alert("주소가 복사되었습니다."); } };
-  window.shareResult = async (key, name) => { const text = `[자연 속 오감테라피] 결과 공유: "${name}"`; try { if (navigator.share) { await navigator.share({ title: "오감테라피 결과", text: text, url: SHARE_URL }); } else { await navigator.clipboard.writeText(SHARE_URL); alert("링크가 복사되었습니다."); } } catch(e) {} };
+  window.copyShareUrl = () => { const input = document.getElementById('shareUrlInput'); input.select(); try { navigator.clipboard.writeText(input.value).then(() => alert("주소가 복사되었습니다.")); } catch(err) { document.execCommand('copy'); alert("주소가 복사되었습니다."); } };
+  window.shareResult = async (key, name) => { 
+      const url = window.location.href;
+      const text = `[자연 속 오감테라피] 결과 공유: "${name}"`; 
+      try { 
+          if (navigator.share) { 
+              await navigator.share({ title: "오감테라피 결과", text: text, url: url }); 
+          } else { 
+              await navigator.clipboard.writeText(url); alert("링크가 복사되었습니다."); 
+          } 
+      } catch(e) {} 
+  };
 
   render();
 })();
